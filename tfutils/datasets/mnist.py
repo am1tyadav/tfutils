@@ -1,12 +1,13 @@
 import tensorflow as tf
 import numpy as np
 
-def load_data():
+def load_data(one_hot=True):
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
     x_train = np.reshape(x_train, (x_train.shape[0], 784))/255.
     x_test = np.reshape(x_test, (x_test.shape[0], 784))/255.
-    y_train = tf.keras.utils.to_categorical(y_train)
-    y_test = tf.keras.utils.to_categorical(y_test)
+    if one_hot:
+        y_train = tf.keras.utils.to_categorical(y_train)
+        y_test = tf.keras.utils.to_categorical(y_test)
     return (x_train, y_train), (x_test, y_test)
 
 def plot_ten_random_examples(plt, x, y, p=None):
@@ -26,3 +27,17 @@ def plot_ten_random_examples(plt, x, y, p=None):
             col = 'r'
         plt.xlabel(str(p[index]), color=col)
     return plt
+
+def load_subset(classes, x, y):
+    """
+    y should not be one hot encoded
+    """
+    x_subset = None
+    for i, c in enumerate(classes):
+        indices = np.squeeze(np.where(y == c))
+        x_c = x[indices]
+        if i == 0:
+            x_subset = np.array(x_c)
+        else:
+            x_subset = np.concatenate([x_subset, x_c], axis=0)
+    return x_subset

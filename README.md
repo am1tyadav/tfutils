@@ -1,6 +1,26 @@
 # TF Utils
 
-A module with a bunch of utilites for TensorFlow + Keras. These are some functions and classes that I found myself writing more than once while creating Machine Learning courses, and projects. Hopefully, some of it is useful for others as well.
+A module with a bunch of utilites for TensorFlow + Keras. These are some functions and classes that I found myself writing more than once while creating various projects. Hopefully, some of it is useful for others as well.
+
+## Installation and Usage
+
+Install:
+
+`pip3 install git+https://github.com/am1tyadav/tfutils.git`
+
+Usage:
+
+```python
+import tfutils
+
+model.fit(
+    x, y,
+    epochs=1,
+    callbacks=[
+        tfutils.keras.callbacks.SimpleTrainingPlot(plt)
+    ]
+)
+```
 
 What's available:
 
@@ -9,7 +29,7 @@ What's available:
 |Utility|Description|
 |---|---|
 |`tfutils.keras.callbacks.SimpleTrainingPlot(plt)`|Requires `matplotlib.pyplot` argument passed as `plt`, and returns a Keras callback that will plot training metrics `loss, val_loss, accuracy, val_accuracy`. Please note the full keyword `accuracy` is used and not `acc`.|
-|`tfutils.keras.callbacks.PCA2DPlot(plt, embedding_model, x_test, y_test)`|Requires `matplotlib.pyplot` argument passed as `plt`, and returns a Keras callback that will plot a 2-dimensional representation of embedding from the `embedding_model` on the set `x_test`, colored with the values of labels `y_test`.|
+|`tfutils.keras.callbacks.PlotEmbedding(plt, embedding_model, x_test, y_test)`|Requires `matplotlib.pyplot` argument passed as `plt`, and returns a Keras callback that will plot a 2-dimensional representation of embedding from the `embedding_model` on the set `x_test`, colored with the values of labels `y_test`.|
 
 ## Keras Losses
 
